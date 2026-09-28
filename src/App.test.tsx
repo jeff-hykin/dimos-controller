@@ -467,7 +467,7 @@ describe("App session states", () => {
         manifestUnsupported: true,
       });
     });
-    expect(container.textContent).toContain("newer than this Cockpit build");
+    expect(container.textContent).toContain("newer than this Controller build");
     view("channels");
     expect(container.querySelector('[data-testid="ch-odom-seq"]')).toBeNull();
   });

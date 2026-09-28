@@ -89,8 +89,8 @@ export function App({ session, relay }: { session: Session; relay?: string }) {
   } else if (status.manifestUnsupported) {
     content = (
       <p className={styles.notice}>
-        This robot's software is newer than this Cockpit build. Reload the page to pick up the
-        latest Cockpit.
+        This robot's software is newer than this Controller build. Reload the page to pick up the
+        latest Controller.
       </p>
     );
   } else if (status.manifest === null || status.manifest.channels.length === 0) {

@@ -60,7 +60,7 @@ export function StatusBar(
   return (
     <header className={styles.bar}>
       <span className={styles.brand}>
-        dimOS <span className={styles.brandSub}>Cockpit</span>
+        dimOS <span className={styles.brandSub}>Controller</span>
       </span>
       {pages.length > 0 && (
         <div role="tablist" aria-label="pages" className={styles.pages}>
