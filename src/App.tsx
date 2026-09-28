@@ -12,7 +12,7 @@ import { TokenForm } from "./ui/TokenForm.tsx";
 import { clearToken, readToken, storeToken } from "./token.ts";
 import styles from "./App.module.css";
 
-export function App({ session }: { session: Session }) {
+export function App({ session, relay }: { session: Session; relay?: string }) {
   const status = useStatus(session);
   const teleop = teleopHooks(session);
   // Panels or the raw channel table, the open page tab, and a pending
@@ -141,6 +141,7 @@ export function App({ session }: { session: Session }) {
         onPageChange={openPage}
         onSwitchRobot={hasMultipleRobots && !showPicker ? () => setPicking(true) : null}
         onLogOut={readToken() !== null ? logOut : null}
+        relay={relay}
       />
       {/* A changed manifest remounts everything below the status bar. */}
       <main className={styles.main} key={status.epoch}>

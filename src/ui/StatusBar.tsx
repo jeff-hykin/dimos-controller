@@ -28,7 +28,7 @@ const PHASE_LABEL: Record<string, string> = {
 };
 
 export function StatusBar(
-  { status, view, onViewChange, pages, page, onPageChange, onSwitchRobot, onLogOut }: {
+  { status, view, onViewChange, pages, page, onPageChange, onSwitchRobot, onLogOut, relay }: {
     status: SessionStatus;
     view: View;
     onViewChange: (view: View) => void;
@@ -41,6 +41,8 @@ export function StatusBar(
     onSwitchRobot: (() => void) | null;
     /** Forgets the stored viewer token; null when none is stored. */
     onLogOut: (() => void) | null;
+    /** The relay address the session talks to, shown faintly at the end. */
+    relay?: string;
   },
 ) {
   const transport = status.transport;
@@ -134,6 +136,9 @@ export function StatusBar(
         <button type="button" className={styles.action} data-testid="log-out" onClick={onLogOut}>
           log out
         </button>
+      )}
+      {relay !== undefined && (
+        <span className={styles.relay} data-testid="relay" title="relay">{relay}</span>
       )}
       {status.lastError !== null && <span className={styles.error}>{status.lastError.message}
       </span>}

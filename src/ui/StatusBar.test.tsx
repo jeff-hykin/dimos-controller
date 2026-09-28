@@ -155,4 +155,11 @@ describe("StatusBar", () => {
     expect(testId("tab-overview").getAttribute("aria-selected")).toBe("false");
     expect(testId("tab-page-overview").getAttribute("aria-selected")).toBe("true");
   });
+
+  it("shows the relay address only when given", () => {
+    render(makeStatus());
+    expect(container.querySelector('[data-testid="relay"]')).toBeNull();
+    render(makeStatus(), { relay: "http://127.0.0.1:7780" });
+    expect(testId("relay").textContent).toBe("http://127.0.0.1:7780");
+  });
 });

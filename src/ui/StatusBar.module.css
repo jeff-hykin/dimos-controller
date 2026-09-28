@@ -193,3 +193,13 @@
   text-overflow: ellipsis;
   white-space: nowrap;
 }
+
+.relay {
+  color: var(--fg-faint);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

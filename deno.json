@@ -8,6 +8,7 @@
   },
   "fmt": {
     "lineWidth": 100,
+    "proseWrap": "preserve",
     "exclude": ["dist/"]
   },
   "lint": {
