@@ -1,0 +1,11 @@
+name: dimos-controller
+title: Controller
+frontend: dist
+requires:
+  dimos-desktop:
+    version: ">=0.1.0"
+    apis: { app.frontend: 1, api.relay: 1 }
+  dimos:
+    version: ">=0.0.14"
+provides:
+  apis: {}
