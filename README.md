@@ -1,17 +1,38 @@
 # dimos-controller
 
-The [dimos](https://github.com/dimensionalOS/dimos) Cockpit (React + three.js robot viewer and teleop UI) packaged as a
-[Desktop](https://github.com/dimensionalOS/dimos-desktop) app. Desktop serves it at `/app/dimos-controller/`; the app finds
-the relay through `?relay=<url>`, then Desktop's `GET /api/relay`, then its own origin, then `http://127.0.0.1:7780`
-(see `src/relay.ts`).
+A [dimOS Desktop](https://github.com/jeff-hykin/dimos-desktop) app (React) for a running
+[dimos](https://github.com/dimensionalOS/dimos) stack: the robot's camera, its costmap with pose and planned
+path, and keyboard teleop.
+
+## dimOS Desktop
+
+```sh
+dimos-desktop install https://github.com/jeff-hykin/dimos-controller --ref dimos-desktop2
+```
+
+The install step (`nix run .#install`) runs `deno install --frozen` and `deno task build` into `dist/`, which
+Desktop serves at `/apps/installed/dimos-controller/controller/`. `dist/` is not committed.
+
+## How it talks to dimos
+
+Everything goes through Desktop's [zenoh-web](https://github.com/jeff-hykin/zenoh-web) bridge at `/zenoh-web`
+(`?bridge=<url>` picks another). The client and [`@dimos/msgs`](https://jsr.io/@dimos/msgs) load from esm.sh at
+runtime (`src/zenoh.ts`). dimos keys are `dimos/<topic>/<msg_name>`:
+
+| panel  | key                                           | how                                              |
+| ------ | --------------------------------------------- | ------------------------------------------------ |
+| camera | `dimos/color_image/sensor_msgs.Image`         | the bridge's `dimos-image` codec: an H.264 track |
+| map    | `dimos/global_costmap/nav_msgs.OccupancyGrid` | raw, decoded in the page                         |
+|        | `dimos/odom/geometry_msgs.PoseStamped`        | raw (robot pose)                                 |
+|        | `dimos/path/nav_msgs.Path`                    | raw (planned path)                               |
+| teleop | `dimos/tele_cmd_vel/geometry_msgs.Twist`      | published at REAL_TIME with a zero-Twist deadman |
+
+Teleop arms on click (only while the pad has focus) and repeats at 10 Hz while keys are held; release, blur or
+a hidden tab sends a stop, and if the page stops heartbeating for 2 s the bridge publishes the stop itself.
 
 ```bash
-deno task dev     # vite on :5173, /api proxied to a relay on :7780
+deno task dev     # vite on :5173, /zenoh-web proxied to a Desktop on :7077
 deno task build   # writes dist/
 deno task test
 deno task check
 ```
-
-`dist/` is committed on purpose: Desktop installs apps by cloning them and never builds. Rebuild and commit it with every
-source change (CI fails if it is stale). `vendor/` holds the dimos web SDK and wire protocol; `vendor/README.md` names the
-dimos commit they came from.

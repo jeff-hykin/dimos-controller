@@ -19,7 +19,3 @@ jobs:
       - run: deno task check
       - run: deno task test
       - run: deno task build
-      - name: committed dist/ matches a fresh build
-        run: |
-          git status --porcelain -- dist
-          test -z "$(git status --porcelain -- dist)" || { echo "dist/ is stale: run deno task build and commit it"; exit 1; }

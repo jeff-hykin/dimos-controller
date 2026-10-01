@@ -1,11 +1,11 @@
 name: dimos-controller
-title: Controller
-frontend: dist
+install: nix run .#install
+apps:
+  - name: controller
+    title: Controller
+    icon: icon.svg
+    frontend: dist
 requires:
   dimos-desktop:
-    version: ">=0.1.0"
-    apis: { app.frontend: 1, api.relay: 1 }
-  dimos:
-    version: ">=0.0.14"
-provides:
-  apis: {}
+    version: ">=0.2.0"
+    apis: { app.frontend: 1, api.zenoh_web: 1 }

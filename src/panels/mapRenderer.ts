@@ -3,9 +3,13 @@
 // ImageData and calls on a caller-supplied 2D context, so it all unit-tests
 // without a canvas.
 
-import type { CostmapValue } from "@dimos/sdk";
-
-export type GridPlacement = Pick<CostmapValue, "w" | "h" | "res" | "origin">;
+/** A grid's size in cells, meters per cell, and its lower-left corner [x, y, yaw] in world. */
+export interface GridPlacement {
+  w: number;
+  h: number;
+  res: number;
+  origin: [number, number, number];
+}
 
 function buildPalette(): Uint8ClampedArray {
   const lut = new Uint8ClampedArray(256 * 4);
@@ -25,7 +29,8 @@ function buildPalette(): Uint8ClampedArray {
 }
 
 // Operator scheme from the hosted-teleop map (_occupancy_to_bgra in
-// dimos/teleop/hosted/map_compress.py), indexed by the wire's uint8 cells.
+// dimos/teleop/hosted/map_compress.py), indexed by uint8 cells (costmap.ts
+// maps OccupancyGrid's -1 "unknown" to 255).
 export const OCCUPANCY_PALETTE: Uint8ClampedArray = buildPalette();
 
 // The same palette as native-endian u32 pixels: one read + one write per
