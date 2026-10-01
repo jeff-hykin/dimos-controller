@@ -1,11 +1,4 @@
-name: dimos-controller
-install: nix run .#install
-apps:
-  - name: controller
-    title: Controller
-    icon: icon.svg
-    frontend: dist
-requires:
-  dimos-desktop:
-    version: ">=0.2.0"
-    apis: { app.frontend: 1, api.zenoh_web: 1 }
+title: Controller
+dimos-desktop-api: ">=1 <2"
+dimos-api:
+  - /zenoh-web

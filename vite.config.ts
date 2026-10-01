@@ -3,7 +3,7 @@ import react from "@vitejs/plugin-react";
 import { defineConfig } from "vite";
 
 export default defineConfig({
-  // Desktop serves the app under /apps/installed/<pkg>/<app>/: every asset path
+  // Desktop serves the app under /apps/<name>/: every asset path
   // must be relative.
   base: "./",
   plugins: [react()],

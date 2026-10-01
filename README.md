@@ -10,8 +10,8 @@ path, and keyboard teleop.
 dimos-desktop install https://github.com/jeff-hykin/dimos-controller --ref dimos-desktop2
 ```
 
-The install step (`nix run .#install`) runs `deno install --frozen` and `deno task build` into `dist/`, which
-Desktop serves at `/apps/installed/dimos-controller/controller/`. `dist/` is not committed.
+Desktop runs `nix build .#dimosApp`: the vite build (npm deps from `package-lock.json`), which it serves at
+`/apps/dimos-controller/`. `dist/` is not committed.
 
 ## How it talks to dimos
 
