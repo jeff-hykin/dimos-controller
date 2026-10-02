@@ -4,7 +4,7 @@
 // uses), so the build carries no copy of either.
 
 export const ZENOH_WEB_CLIENT_URL =
-  "https://esm.sh/gh/jeff-hykin/zenoh-web@f6f9de2/client/zenoh_web.ts";
+  "https://esm.sh/gh/jeff-hykin/zenoh-web@63b72dd/client/zenoh_web.ts";
 export const DIMOS_MSGS_URL = "https://esm.sh/jsr/@dimos/msgs@0.1.4";
 
 /** dimos puts a typed channel on `dimos/<topic>/<msg_name>`. */
