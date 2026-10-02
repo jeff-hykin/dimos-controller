@@ -78,7 +78,7 @@ export interface Link {
 export const PRIORITY_REAL_TIME = 1;
 
 /** Connect to the bridge, retrying every 3 s until it answers. */
-export async function openLink(bridgeUrl = "/zenoh-web"): Promise<Link> {
+export async function openLink(bridgeUrl: string): Promise<Link> {
   const [client, msgs] = await Promise.all([
     import(/* @vite-ignore */ ZENOH_WEB_CLIENT_URL),
     import(/* @vite-ignore */ DIMOS_MSGS_URL),

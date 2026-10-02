@@ -7,8 +7,9 @@ import { createRoot } from "react-dom/client";
 import { App } from "./App.tsx";
 import { openLink } from "./zenoh.ts";
 
-// ?bridge=<url> points at another zenoh-web bridge; Desktop's is same-origin.
-const bridge = new URL(location.href).searchParams.get("bridge") ?? "/zenoh-web";
+// ?bridge=<url> points at another zenoh-web bridge; Desktop's is same-origin at /zenoh-web (we're at /apps/<name>/).
+const bridge = new URL(location.href).searchParams.get("bridge") ??
+  new URL("../../zenoh-web", location.href).href;
 const root = createRoot(document.getElementById("root")!);
 
 root.render(<App link={null} bridge={bridge} />);
