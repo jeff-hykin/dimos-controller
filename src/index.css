@@ -1,4 +1,4 @@
-/* Design tokens (MemWorld dark palette, as in dim-live-viewer) and page-wide defaults.
+/* Design tokens (MemWorld dark palette with the dimOS blue accent) and page-wide defaults.
    Every module stylesheet reads these; nothing else in the cockpit hardcodes a color. */
 
 :root {
@@ -11,9 +11,10 @@
   --fg: #e6eef7;
   --fg-muted: #8fa3b8;
   --fg-faint: #5f7189;
-  --accent: #7af0a8;
-  --accent-soft: rgba(122, 240, 168, 0.14);
-  --accent-ring: rgba(122, 240, 168, 0.45);
+  --accent: #4da3ff; /* dimOS blue: interactive + identity; --ok (mint) is status only */
+  --accent-hover: #7fc8ff;
+  --accent-soft: rgba(77, 163, 255, 0.14);
+  --accent-ring: rgba(77, 163, 255, 0.45);
   --on-accent: #06090f;
   --ok: #7af0a8;
   --warn: #ffd166;
