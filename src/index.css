@@ -1,23 +1,23 @@
-/* Design tokens and page-wide defaults. Every module stylesheet reads these;
-   nothing else in the cockpit hardcodes a color. */
+/* Design tokens (MemWorld dark palette, as in dim-live-viewer) and page-wide defaults.
+   Every module stylesheet reads these; nothing else in the cockpit hardcodes a color. */
 
 :root {
-  --bg-0: #0b0d10;
-  --bg-1: #121519;
-  --bg-2: #191d23;
-  --bg-3: #22272f;
-  --line: rgba(255, 255, 255, 0.08);
-  --line-strong: rgba(255, 255, 255, 0.14);
-  --fg: #e6ebf0;
-  --fg-muted: #9aa4b0;
-  --fg-faint: #5f6873;
-  --accent: #22d3ee;
-  --accent-soft: rgba(34, 211, 238, 0.14);
-  --accent-ring: rgba(34, 211, 238, 0.45);
-  --on-accent: #06181c;
-  --ok: #3fb950;
-  --warn: #d29922;
-  --danger: #ff5c5c;
+  --bg-0: #06090f;
+  --bg-1: #0b1018;
+  --bg-2: #0e1520;
+  --bg-3: #142030;
+  --line: #182436;
+  --line-strong: #22324a;
+  --fg: #e6eef7;
+  --fg-muted: #8fa3b8;
+  --fg-faint: #5f7189;
+  --accent: #7af0a8;
+  --accent-soft: rgba(122, 240, 168, 0.14);
+  --accent-ring: rgba(122, 240, 168, 0.45);
+  --on-accent: #06090f;
+  --ok: #7af0a8;
+  --warn: #ffd166;
+  --danger: #ff5f6d;
   --radius-s: 4px;
   --radius: 6px;
   --radius-l: 8px;

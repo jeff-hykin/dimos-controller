@@ -138,7 +138,7 @@ export function gridBlit(
 }
 
 export type PathPoint = [number, number];
-export const PATH_COLOR = "#3fb950";
+export const PATH_COLOR = "#7af0a8";
 const PATH_PX = 2;
 
 export function drawPath(
@@ -158,7 +158,7 @@ export function drawPath(
   ctx.stroke();
 }
 
-export const POSE_COLOR = "#ff5c5c";
+export const POSE_COLOR = "#ff5f6d";
 // Triangle length in CSS pixels: screen-constant so the marker stays legible
 // however far the fit zooms out. The canvas backing store is DPR-scaled, so
 // callers pass their dpr to keep the on-screen size constant.
