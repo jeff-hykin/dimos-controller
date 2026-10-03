@@ -1,36 +1,8 @@
-/* Design tokens (MemWorld dark palette with the dimOS blue accent) and page-wide defaults.
-   Every module stylesheet reads these; nothing else in the cockpit hardcodes a color. */
-
-:root {
-  --bg-0: #06090f;
-  --bg-1: #0b1018;
-  --bg-2: #0e1520;
-  --bg-3: #142030;
-  --line: #182436;
-  --line-strong: #22324a;
-  --fg: #e6eef7;
-  --fg-muted: #8fa3b8;
-  --fg-faint: #5f7189;
-  --accent: #4da3ff; /* dimOS blue: interactive + identity; --ok (mint) is status only */
-  --accent-hover: #7fc8ff;
-  --accent-soft: rgba(77, 163, 255, 0.14);
-  --accent-ring: rgba(77, 163, 255, 0.45);
-  --on-accent: #06090f;
-  --ok: #7af0a8;
-  --warn: #ffd166;
-  --danger: #ff5f6d;
-  --radius-s: 4px;
-  --radius: 6px;
-  --radius-l: 8px;
-  --dur: 120ms;
-  --font-ui: "Inter Variable", system-ui, sans-serif;
-  --font-mono: "JetBrains Mono Variable", ui-monospace, SFMono-Regular, Menlo, monospace;
-  color-scheme: dark;
-}
+/* Page-wide defaults on top of the shared Science theme (theme.css): colors, fonts and radii
+   are its tokens; nothing in the cockpit hardcodes a UI color. */
 
 * {
-  box-sizing: border-box;
-  scrollbar-color: var(--bg-3) transparent;
+  scrollbar-color: var(--border) transparent;
   scrollbar-width: thin;
 }
 
@@ -42,10 +14,6 @@ body,
 }
 
 body {
-  -webkit-font-smoothing: antialiased;
-  background: var(--bg-0);
-  color: var(--fg);
-  font: 13px/1.4 var(--font-ui);
   font-variant-numeric: tabular-nums;
 }
 
@@ -56,11 +24,11 @@ input {
 }
 
 ::selection {
-  background: var(--accent-soft);
+  background: var(--primary-soft);
 }
 
 :focus-visible {
-  outline: 2px solid var(--accent-ring);
+  outline: 2px solid var(--ring);
   outline-offset: 1px;
 }
 

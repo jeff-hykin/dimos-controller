@@ -9,9 +9,9 @@
   "fmt": {
     "lineWidth": 100,
     "proseWrap": "preserve",
-    "exclude": ["dist/"]
+    "exclude": ["dist/", "src/theme.css", "src/dim-theme.js", "src/dim-icons.js"]
   },
   "lint": {
-    "exclude": ["dist/"]
+    "exclude": ["dist/", "src/theme.css", "src/dim-theme.js", "src/dim-icons.js"]
   }
 }

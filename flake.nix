@@ -14,7 +14,7 @@
                     pname = "dimos-controller";
                     version = "0.1.0";
                     src = self;
-                    npmDepsHash = "sha256-NhaJ+kD7ree7uYimC/WW1Hy0KO8cAtWJkRz3Uylut3w=";
+                    npmDepsHash = "sha256-/GZR2XpXavCEb7L7yjfiekoItagkuXnhD8g95YAoWOM=";
                     buildPhase = ''
                         runHook preBuild
                         node node_modules/vite/bin/vite.js build

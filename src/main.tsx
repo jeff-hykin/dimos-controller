@@ -1,7 +1,7 @@
-// Stylesheets first so the module styles imported by App win ties with the
-// page-wide defaults (bundle order follows import order).
-import "@fontsource-variable/inter/wght.css";
-import "@fontsource-variable/jetbrains-mono/wght.css";
+// Theme first (light/dark follows Desktop), then stylesheets so the module styles imported by App
+// win ties with the page-wide defaults (bundle order follows import order).
+import "./dim-theme.js";
+import "./theme.css";
 import "./index.css";
 import { createRoot } from "react-dom/client";
 import { App } from "./App.tsx";
