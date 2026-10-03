@@ -76,10 +76,12 @@
     position: relative;
 }
 
-.toggle {
-    font-size: 10px;
+/* doubled class: beats theme.css's .dim-btn.sm padding */
+.toggle.toggle {
+    font-size: 9px;
     height: 18px;
-    padding: 0 6px;
+    line-height: 16px;
+    padding: 0 7px;
 }
 
 .toggle[aria-pressed="false"] {
