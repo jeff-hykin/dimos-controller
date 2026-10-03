@@ -1,0 +1,88 @@
+/* Layout only: the surface is .dim-panel, the title .dim-label, the button .dim-btn, the badge .dim-badge. */
+
+.frame,
+.frameMax {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    min-height: 0;
+    min-width: 0;
+    overflow: hidden;
+    width: 100%;
+}
+
+.frameMax {
+    box-shadow: 0 0 0 100vmax color-mix(in srgb, var(--bg) 70%, transparent), var(--shadow-lg);
+    inset: 8px;
+    position: fixed;
+    width: auto;
+    z-index: 10;
+}
+
+.head {
+    align-items: center;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    flex: none;
+    gap: 8px;
+    height: 26px;
+    justify-content: space-between;
+    padding: 0 4px 0 10px;
+}
+
+.title {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.controls {
+    align-items: center;
+    display: flex;
+    flex: none;
+    gap: 6px;
+}
+
+.badge {
+    padding: 1px 7px;
+    white-space: nowrap;
+}
+
+.badge[data-state="waiting"] .dot {
+    opacity: 0.5;
+}
+
+.maxButton {
+    font-size: 12px;
+    height: 20px;
+    opacity: 0.4;
+    padding: 0;
+    transition: opacity 120ms;
+    width: 20px;
+}
+
+.head:hover .maxButton,
+.maxButton:focus-visible,
+.frameMax .maxButton {
+    opacity: 1;
+}
+
+.body {
+    align-items: center;
+    display: flex;
+    flex: 1;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+}
+
+.toggle {
+    font-size: 10px;
+    height: 18px;
+    padding: 0 6px;
+}
+
+.toggle[aria-pressed="false"] {
+    opacity: 0.5;
+    text-decoration: line-through;
+}

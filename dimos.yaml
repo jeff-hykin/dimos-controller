@@ -1,3 +1,99 @@
 title: Controller
 dimos-desktop-api: ">=2 <3"
 zenoh-web: ">=0.4 <0.5"
+caches:
+    - url: "https://dimos-desktop.cachix.org"
+      key: "dimos-desktop.cachix.org-1:A4P35aGJGmCan92LWyamtSFXMqaVE+VRFYnrJ8QMTeQ="
+agent:
+    description: >-
+        Controller: drive a dimos robot (velocity commands, stop, arm/disarm teleop) and watch its camera, costmap, pose and
+        planned path
+    endpoints:
+        - method: GET
+          path: api/state
+          description: >-
+              The robot link (the open page's zenoh-web connection), stream rates (camera, costmap, pose, path), the robot's
+              pose, whether teleop is armed, the active drive command, speed limits, map layers and the maximized panel
+          role: context
+        - method: GET
+          path: api/view
+          description: >-
+              What the user sees: the costmap panel (map, robot pose, planned path) and the latest camera frame, as images,
+              plus the robot pose (needs the app open in Desktop)
+          role: view
+        - method: POST
+          path: api/drive
+          description: >-
+              Drive the robot: body velocities vx (forward, m/s), vy (left, m/s), wz (turn left, rad/s) for durationMs
+              (default 500, at most 3000), then it stops. Needs teleop armed (POST api/teleop/arm) and an open Controller page
+              connected to the robot. dryRun=true moves nothing and answers with the Twist that would be sent
+          params:
+              vx:
+                  type: number
+                  description: m/s forward (+) / back (-)
+              vy:
+                  type: number
+                  description: m/s left (+) / right (-)
+              wz:
+                  type: number
+                  description: rad/s turn left (+) / right (-)
+              durationMs:
+                  type: number
+                  description: "how long, ms (default 500, max 3000)"
+              dryRun:
+                  type: boolean
+                  description: "true: validate and report, publish nothing"
+              source:
+                  type: string
+                  description: agent (default) or keyboard (the page's pad)
+        - method: POST
+          path: api/stop
+          description: Stop the robot now (a zero Twist) and drop any drive command
+        - method: POST
+          path: api/teleop/arm
+          description: >-
+              Arm or disarm driving (the teleop pad's mode). Disarming stops the robot. Drive commands are refused while
+              disarmed
+          params:
+              armed:
+                  type: boolean
+                  required: true
+              source:
+                  type: string
+                  description: agent (default) or keyboard (the page's pad)
+        - method: POST
+          path: api/teleop/limits
+          description: >-
+              Teleop speeds: linear (m/s) and angular (rad/s) for a keypress, and boost (the Shift multiplier, also the cap on
+              drive commands)
+          params:
+              linear:
+                  type: number
+                  description: m/s (0 to 2)
+              angular:
+                  type: number
+                  description: rad/s (0 to 4)
+              boost:
+                  type: number
+                  description: multiplier (1 to 4)
+        - method: POST
+          path: api/layers
+          description: >-
+              Show or hide what the panels draw: camera (the video stream; off unsubscribes it), costmap, pose (robot arrow),
+              path (planned path)
+          params:
+              camera:
+                  type: boolean
+              costmap:
+                  type: boolean
+              pose:
+                  type: boolean
+              path:
+                  type: boolean
+        - method: POST
+          path: api/layout
+          description: "Maximize one panel (video, map or teleop) over the others, or none to restore the grid"
+          params:
+              maximized:
+                  type: string
+                  description: video | map | teleop | none

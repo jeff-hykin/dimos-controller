@@ -1,0 +1,13 @@
+.canvas {
+    background: var(--bg);
+    display: block;
+    height: 100%;
+    width: 100%;
+}
+
+.waiting {
+    color: var(--muted-fg);
+    font-family: var(--mono);
+    font-size: 12px;
+    position: absolute;
+}

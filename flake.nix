@@ -1,31 +1,28 @@
 {
-    description = "dimos-controller: camera, costmap and keyboard teleop over zenoh-web, as a dimOS Desktop app";
-
+    description = "dimos-controller: drive a dimos robot and watch its camera and costmap, as a dimOS Desktop app (`nix build .#dimosApp`)";
     inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
-
+    nixConfig = {
+        extra-substituters = [ "https://dimos-desktop.cachix.org" ];
+        extra-trusted-public-keys = [ "dimos-desktop.cachix.org-1:A4P35aGJGmCan92LWyamtSFXMqaVE+VRFYnrJ8QMTeQ=" ];
+    };
     outputs = { self, nixpkgs }:
         let
             systems = [ "aarch64-darwin" "x86_64-darwin" "x86_64-linux" "aarch64-linux" ];
-            forAllSystems = f: nixpkgs.lib.genAttrs systems (system: f nixpkgs.legacyPackages.${system});
+            forAll = f: nixpkgs.lib.genAttrs systems (system: f nixpkgs.legacyPackages.${system});
         in {
-            packages = forAllSystems (pkgs: {
-                # the vite build, served at /apps/<name>/ (deps from package-lock.json; deno.lock is for dev and CI)
-                dimosApp = pkgs.buildNpmPackage {
-                    pname = "dimos-controller";
+            packages = forAll (pkgs: rec {
+                frontend = pkgs.buildNpmPackage {
+                    pname = "dimos-controller-frontend";
                     version = "0.1.0";
-                    src = self;
-                    npmDepsHash = "sha256-/GZR2XpXavCEb7L7yjfiekoItagkuXnhD8g95YAoWOM=";
-                    buildPhase = ''
-                        runHook preBuild
-                        node node_modules/vite/bin/vite.js build
-                        runHook postBuild
-                    '';
-                    installPhase = ''
-                        runHook preInstall
-                        cp -r dist $out
-                        runHook postInstall
-                    '';
+                    src = ./frontend;
+                    # `nix build .#frontend` prints the right hash when package-lock.json changes
+                    npmDepsHash = "sha256-pr/PTVVu5IBNFtlWrixmwhgu+5Vu3wB99J3TPdsK4e8=";
+                    installPhase = "cp -r dist $out";
                 };
+                dimosApp = pkgs.writeShellScriptBin "dimos-app-server" ''
+                    exec ${pkgs.deno}/bin/deno run -A --no-lock ${./backend}/main.ts --frontend ${frontend} "$@"
+                '';
+                default = dimosApp;
             });
         };
 }

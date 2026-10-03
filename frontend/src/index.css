@@ -1,0 +1,43 @@
+/* Page-wide defaults on top of the shared Science theme (theme.css): colors, fonts and radii
+   are its tokens; nothing in the cockpit hardcodes a UI color. */
+
+* {
+    scrollbar-color: var(--border) transparent;
+    scrollbar-width: thin;
+}
+
+html,
+body,
+#root {
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    font-variant-numeric: tabular-nums;
+}
+
+button,
+input {
+    color: inherit;
+    font: inherit;
+}
+
+::selection {
+    background: var(--primary-soft);
+}
+
+:focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 1px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    ::before,
+    ::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
