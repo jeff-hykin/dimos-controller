@@ -1,5 +1,7 @@
 .app {
   display: flex;
+  font-size: 13px; /* cockpit density, under the theme's 14px body */
+  line-height: 1.4;
   flex-direction: column;
   height: 100%;
 }
@@ -13,7 +15,7 @@
 }
 
 .notice {
-  color: var(--fg-muted);
+  color: var(--muted-fg);
   margin: 2rem auto;
   text-align: center;
 }

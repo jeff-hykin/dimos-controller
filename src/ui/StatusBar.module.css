@@ -1,7 +1,7 @@
 .bar {
   align-items: center;
-  background: var(--bg-1);
-  border-bottom: 1px solid var(--line);
+  background: var(--card);
+  border-bottom: 1px solid var(--border);
   display: flex;
   flex: none;
   gap: 12px;
@@ -19,9 +19,9 @@
 }
 
 .brand::before {
-  background: var(--accent);
+  background: var(--primary);
   border-radius: 2px;
-  box-shadow: 0 0 8px var(--accent-ring);
+  box-shadow: 0 0 8px var(--ring-soft);
   content: "";
   height: 9px;
   margin-right: 2px;
@@ -29,113 +29,19 @@
 }
 
 .brandSub {
-  color: var(--fg-muted);
+  color: var(--muted-fg);
   font-weight: 400;
 }
 
-.pages {
-  align-self: stretch;
-  display: flex;
-  flex: 1;
-  gap: 2px;
-  min-width: 0;
-  overflow-x: auto;
-  overflow-y: hidden;
-}
-
-.tab,
-.tabActive {
-  background: none;
-  border: none;
-  border-bottom: 2px solid transparent;
-  border-top: 2px solid transparent;
-  color: var(--fg-muted);
-  cursor: pointer;
-  font-size: 12px;
-  font-weight: 500;
-  padding: 0 10px;
-  transition: color var(--dur);
-  white-space: nowrap;
-}
-
-.tab:hover {
-  color: var(--fg);
-}
-
-.tabActive {
-  border-bottom-color: var(--accent);
-  color: var(--fg);
-}
-
-.views {
-  background: var(--bg-2);
-  border: 1px solid var(--line);
-  border-radius: 999px;
-  display: flex;
-  flex: none;
-  gap: 2px;
-  margin-left: auto;
-  padding: 2px;
-}
-
-.view,
-.viewActive {
-  background: none;
-  border: none;
-  border-radius: 999px;
-  color: var(--fg-muted);
-  cursor: pointer;
-  font-size: 11px;
-  line-height: 18px;
-  padding: 0 9px;
-  transition: background var(--dur), color var(--dur);
-}
-
-.view:hover {
-  color: var(--fg);
-}
-
-.viewActive {
-  background: var(--bg-3);
-  color: var(--fg);
-}
-
 .pill {
-  align-items: center;
-  color: var(--fg-muted);
-  display: inline-flex;
   flex: none;
-  font-family: var(--font-mono);
-  font-size: 11px;
-  gap: 6px;
+  padding: 1px 8px;
   white-space: nowrap;
 }
 
-.pill::before {
-  background: var(--fg-faint);
-  border-radius: 50%;
-  content: "";
-  height: 7px;
-  width: 7px;
-}
-
-.pill[data-phase="connected"]::before {
-  background: var(--ok);
-  box-shadow: 0 0 6px var(--ok);
-}
-
-.pill[data-phase="connecting"]::before,
-.pill[data-phase="reconnecting"]::before {
+.pill[data-phase="connecting"] :global(.dot),
+.pill[data-phase="reconnecting"] :global(.dot) {
   animation: pulse 1.2s ease-in-out infinite;
-  background: var(--warn);
-}
-
-.pill[data-phase="failed"] {
-  color: var(--danger);
-}
-
-.pill[data-phase="failed"]::before {
-  background: var(--danger);
 }
 
 @keyframes pulse {
@@ -147,56 +53,9 @@
   }
 }
 
-.detail {
-  color: var(--fg-muted);
-  font-family: var(--font-mono);
-  font-size: 11px;
-  white-space: nowrap;
-}
-
-.robot {
-  color: var(--fg-muted);
-  flex: none;
-  font-family: var(--font-mono);
-  font-size: 11px;
-  white-space: nowrap;
-}
-
-.model {
-  color: var(--fg-faint);
-}
-
-.action {
-  background: none;
-  border: 1px solid var(--line-strong);
-  border-radius: var(--radius-s);
-  color: var(--fg-muted);
-  cursor: pointer;
-  flex: none;
-  font-size: 11px;
-  line-height: 18px;
-  padding: 0 7px;
-  transition: border-color var(--dur), color var(--dur);
-  white-space: nowrap;
-}
-
-.action:hover {
-  border-color: var(--fg-faint);
-  color: var(--fg);
-}
-
-.error {
-  color: var(--danger);
-  font-size: 11px;
-  min-width: 0;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
 .relay {
-  color: var(--fg-faint);
-  font-family: var(--font-mono);
+  color: color-mix(in srgb, var(--muted-fg) 75%, transparent);
+  font-family: var(--mono);
   font-size: 11px;
   min-width: 0;
   overflow: hidden;

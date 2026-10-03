@@ -105,9 +105,7 @@ export function TeleopPanel({ link, topic }: { link: Link; topic: string }) {
   if (state === "arming") {
     banner = <span className={styles.hint}>arming (deadman)...</span>;
   } else if (state === "armed") {
-    banner = (
-      <span className={styles.armed}>armed - WASD drive, QE strafe, Shift boost, Space stop</span>
-    );
+    banner = <span>armed - WASD drive, QE strafe, Shift boost, Space stop</span>;
   } else {
     banner = <span className={styles.hint}>click to arm</span>;
   }
@@ -127,7 +125,9 @@ export function TeleopPanel({ link, topic }: { link: Link; topic: string }) {
         onKeyDown={onKeyDown}
         onKeyUp={onKeyUp}
       >
-        <div className={styles.banner}>{banner}</div>
+        <div className={`dim-alert ${state === "armed" ? "warn" : ""} ${styles.banner}`}>
+          {banner}
+        </div>
         <div className={styles.cluster}>
           {KEY_ROWS.map((row) => (
             <div key={row[0].code} className={styles.keyRow}>

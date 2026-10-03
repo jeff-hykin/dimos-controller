@@ -1,8 +1,7 @@
+/* Layout only: the surface is .dim-panel, the title .dim-label, the button .dim-btn, the badge .dim-badge. */
+
 .frame,
 .frameMax {
-  background: var(--bg-1);
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
   display: flex;
   flex: 1;
   flex-direction: column;
@@ -13,8 +12,7 @@
 }
 
 .frameMax {
-  border-color: var(--line-strong);
-  box-shadow: 0 0 0 100vmax rgba(0, 0, 0, 0.6), 0 24px 64px rgba(0, 0, 0, 0.7);
+  box-shadow: 0 0 0 100vmax color-mix(in srgb, var(--bg) 70%, transparent), var(--shadow-lg);
   inset: 8px;
   position: fixed;
   width: auto;
@@ -23,7 +21,7 @@
 
 .head {
   align-items: center;
-  border-bottom: 1px solid var(--line);
+  border-bottom: 1px solid var(--border);
   display: flex;
   flex: none;
   gap: 8px;
@@ -33,13 +31,8 @@
 }
 
 .title {
-  color: var(--fg-muted);
-  font-size: 11px;
-  font-weight: 500;
-  letter-spacing: 0.06em;
   overflow: hidden;
   text-overflow: ellipsis;
-  text-transform: uppercase;
   white-space: nowrap;
 }
 
@@ -50,60 +43,21 @@
   gap: 6px;
 }
 
-.badge,
-.badgeStale {
-  align-items: center;
-  color: var(--fg-muted);
-  display: inline-flex;
-  font-family: var(--font-mono);
-  font-size: 11px;
-  gap: 5px;
+.badge {
+  padding: 1px 7px;
   white-space: nowrap;
 }
 
-.badge::before,
-.badgeStale::before {
-  background: var(--fg-faint);
-  border-radius: 50%;
-  content: "";
-  height: 6px;
-  width: 6px;
-}
-
-.badge[data-state="live"]::before {
-  background: var(--ok);
-  box-shadow: 0 0 6px var(--ok);
-}
-
-.badgeStale[data-state="stale"] {
-  color: var(--warn);
-}
-
-.badgeStale[data-state="stale"]::before {
-  background: var(--warn);
-}
-
-.badgeStale[data-state="error"] {
-  color: var(--danger);
-}
-
-.badgeStale[data-state="error"]::before {
-  background: var(--danger);
+.badge[data-state="waiting"] .dot {
+  opacity: 0.5;
 }
 
 .maxButton {
-  align-items: center;
-  background: none;
-  border: none;
-  border-radius: var(--radius-s);
-  color: var(--fg-muted);
-  cursor: pointer;
-  display: inline-flex;
+  font-size: 12px;
   height: 20px;
-  justify-content: center;
   opacity: 0.4;
   padding: 0;
-  transition: background var(--dur), color var(--dur), opacity var(--dur);
+  transition: opacity 120ms;
   width: 20px;
 }
 
@@ -111,11 +65,6 @@
 .maxButton:focus-visible,
 .frameMax .maxButton {
   opacity: 1;
-}
-
-.maxButton:hover {
-  background: var(--bg-3);
-  color: var(--fg);
 }
 
 .body {
