@@ -72,7 +72,7 @@ export function PanelFrame({ id, title, badge, children }: {
             onClick={() => setMaximized((v) => !v)}
           >
             <svg className="dim-icon" viewBox="0 0 24 24" aria-hidden="true">
-              <path d={DIM_ICON_PATHS[maximized ? "close" : "fullscreen"]} />
+              <path d={DIM_ICON_PATHS[maximized ? "fullscreen-exit" : "fullscreen"]} />
             </svg>
           </button>
         </span>
